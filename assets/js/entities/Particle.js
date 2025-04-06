@@ -1,81 +1,85 @@
-// Enemy.js - Enemy (wasp) entity implementation
+// Particle.js - Explosion particle implementation
 import { Entity } from './Entity.js';
 
-export class Enemy extends Entity {
-    constructor(scene, events) {
+export class Particle extends Entity {
+    constructor(scene, events, position, color, lifetime) {
         super(scene, events);
-    }
-    
-    /**
-     * Create enemy mesh (wasp model)
-     */
-    createMesh() {
-        const waspGroup = new THREE.Group();
         
-        // Wasp body (two segments)
-        const thoraxGeometry = new THREE.SphereGeometry(1, 16, 16);
-        const thoraxMaterial = new THREE.MeshLambertMaterial({ color: 0xffd700 });
-        const thorax = new THREE.Mesh(thoraxGeometry, thoraxMaterial);
-        
-        const abdomenGeometry = new THREE.SphereGeometry(1.2, 16, 16);
-        const abdomenMaterial = new THREE.MeshLambertMaterial({ color: 0x000000 });
-        const abdomen = new THREE.Mesh(abdomenGeometry, abdomenMaterial);
-        abdomen.position.z = -1.5;
-        
-        // Wasp head
-        const headGeometry = new THREE.SphereGeometry(0.7, 16, 16);
-        const head = new THREE.Mesh(headGeometry, thoraxMaterial);
-        head.position.z = 1.2;
-        
-        // Wasp wings
-        const wingGeometry = new THREE.PlaneGeometry(2, 1);
-        const wingMaterial = new THREE.MeshLambertMaterial({
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.7,
-            side: THREE.DoubleSide
-        });
-        
-        const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
-        leftWing.position.set(-1.2, 0.7, 0);
-        leftWing.rotation.y = Math.PI / 4;
-        
-        const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
-        rightWing.position.set(1.2, 0.7, 0);
-        rightWing.rotation.y = -Math.PI / 4;
-        
-        // Wasp stripes
-        for (let i = 0; i < 3; i++) {
-            const stripeGeometry = new THREE.TorusGeometry(
-                1.2,
-                0.15,
-                8,
-                16,
-                Math.PI / 2
-            );
-            const stripeMaterial = new THREE.MeshLambertMaterial({ color: 0xffd700 });
-            const stripe = new THREE.Mesh(stripeGeometry, stripeMaterial);
-            stripe.position.z = -1.5 - 0.4 * i;
-            stripe.rotation.x = Math.PI / 2;
-            waspGroup.add(stripe);
+        // Set initial position
+        if (position) {
+            this.position.copy(position);
         }
         
-        waspGroup.add(thorax);
-        waspGroup.add(abdomen);
-        waspGroup.add(head);
-        waspGroup.add(leftWing);
-        waspGroup.add(rightWing);
+        this.color = color || 0xff0000;
+        this.created = Date.now();
+        this.lifetime = lifetime || 1000;
         
-        this.mesh = waspGroup;
+        // Set random velocity
+        const speed = Math.random() * 10 + 5;
+        const angle = Math.random() * Math.PI * 2;
+        const height = Math.random() * 8 - 4;
+        
+        this.velocity.set(
+            Math.cos(angle) * speed,
+            height,
+            Math.sin(angle) * speed
+        );
     }
     
     /**
-     * Enemy shoots a bullet
+     * Create particle mesh
      */
-    shoot() {
-        this.events.publish('enemy:shoot', {
-            position: new THREE.Vector3(this.position.x, this.position.y - 2, 0),
-            direction: -1
+    createMesh() {
+        // Random size
+        const size = Math.random() * 0.5 + 0.2;
+        const geometry = new THREE.BoxGeometry(size, size, size);
+        const material = new THREE.MeshBasicMaterial({
+            color: this.color,
+            emissive: this.color,
+            emissiveIntensity: 0.5,
+            transparent: true,
+            opacity: 1
         });
+        
+        this.mesh = new THREE.Mesh(geometry, material);
+    }
+    
+    /**
+     * Update particle
+     * @param {number} deltaTime - Time since last update
+     */
+    update(deltaTime) {
+        super.update(deltaTime);
+        
+        // Apply gravity
+        const gravity = 9.8 * deltaTime;
+        this.velocity.y -= gravity;
+        
+        // Rotate particle
+        if (this.mesh) {
+            this.mesh.rotation.x += deltaTime * 5;
+            this.mesh.rotation.y += deltaTime * 5;
+        }
+        
+        // Check lifetime
+        const now = Date.now();
+        const age = now - this.created;
+        const normalizedAge = age / this.lifetime;
+        
+        if (normalizedAge >= 1) {
+            // Remove expired particles
+            this.destroy();
+        } else {
+            // Fade out
+            if (this.mesh && this.mesh.material && this.mesh.material.opacity !== undefined) {
+                this.mesh.material.opacity = 1 - normalizedAge;
+            }
+            
+            // Shrink slightly
+            const scale = 1 - normalizedAge * 0.5;
+            if (this.mesh) {
+                this.mesh.scale.set(scale, scale, scale);
+            }
+        }
     }
 }

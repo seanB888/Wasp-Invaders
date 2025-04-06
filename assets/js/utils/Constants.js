@@ -14,6 +14,7 @@ export const GAME_STATES = {
 // Player settings
 export const PLAYER_SPEED = 20;
 export const PLAYER_SHOT_DELAY = 500;
+export const BULLET_SPEED = 40;
 
 // Enemy settings
 export const ENEMY_ROWS = 4;
