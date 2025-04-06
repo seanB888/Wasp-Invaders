@@ -32,6 +32,12 @@ export class EntityManager {
         
         // Explosion events
         this.events.subscribe('entity:explode', data => this.createExplosion(data.position, data.isWasp));
+        
+        // Store latest input state
+        this.latestInput = {};
+        this.events.subscribe('input:state', data => {
+            this.latestInput = data;
+        });
     }
     
     /**
@@ -132,8 +138,8 @@ export class EntityManager {
      * @param {Object} input - Input state
      */
     update(deltaTime) {
-        // Get input state from the event bus
-        const input = this.events.getLatestData('input:state') || {};
+        // We'll store the latest input state locally instead of using getLatestData
+        const input = this.latestInput || {};
         
         // Update player if it exists
         if (this.player) {
