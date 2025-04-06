@@ -20,12 +20,7 @@ export class Game {
         this.state = GAME_STATES.INIT;
         this.clock = new THREE.Clock();
         
-        // Managers
-        this.entities = new EntityManager(this.events);
-        this.collisions = new CollisionManager(this.events);
-        this.score = new ScoreManager(this.events);
-        this.powerUps = new PowerUpManager(this.events);
-        this.level = new LevelManager(this.events);
+        // We'll initialize managers after renderer is set up
         
         // Setup event listeners
         this.setupEvents();
@@ -40,6 +35,14 @@ export class Game {
         // Initialize systems
         this.renderer.init();
         this.input.init();
+        
+        // Now that the renderer is initialized, we can create the other managers
+        this.scene = this.renderer.getScene();
+        this.entities = new EntityManager(this.events, this.scene);
+        this.score = new ScoreManager(this.events);
+        this.powerUps = new PowerUpManager(this.events);
+        this.level = new LevelManager(this.events, this.entities);
+        this.collisions = new CollisionManager(this.events, this.entities);
         
         // Create game boundaries
         this.renderer.createBoundaries(GAME_WIDTH, GAME_HEIGHT);
