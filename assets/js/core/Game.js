@@ -86,6 +86,12 @@ export class Game {
         
         // Level events
         this.events.subscribe('level:complete', () => this.level.nextLevel());
+
+        this.events.subscribe('score:updated', (score) => {
+            if (this.domElements && this.domElements.scoreElement) {
+                this.domElements.scoreElement.textContent = `Score: ${score}`;
+            }
+        });
     }
     
     setState(newState) {
