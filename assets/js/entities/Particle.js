@@ -33,7 +33,7 @@ export class Particle extends Entity {
         // Random size
         const size = Math.random() * 0.5 + 0.2;
         const geometry = new THREE.BoxGeometry(size, size, size);
-        const material = new THREE.MeshBasicMaterial({
+        const material = new THREE.MeshLambertMaterial({
             color: this.color,
             emissive: this.color,
             emissiveIntensity: 0.5,

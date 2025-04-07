@@ -1,5 +1,5 @@
 // LevelManager.js - Manages game levels and difficulty
-import { GAME_WIDTH, GAME_HEIGHT, ENEMY_ROWS, ENEMIES_PER_ROW } from '../utils/Constants.js';
+import { GAME_WIDTH, GAME_HEIGHT, ENEMY_ROWS, ENEMIES_PER_ROW, ENEMY_DESCENT } from '../utils/Constants.js';
 
 export class LevelManager {
     constructor(events, entityManager) {
