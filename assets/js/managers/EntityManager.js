@@ -181,6 +181,7 @@ export class EntityManager {
             
             // Remove inactive bullets
             if (!bullet.active) {
+                console.log('Removing inactive bullet');
                 bullets.splice(i, 1);
             }
         }

@@ -1,6 +1,8 @@
 // ScoreManager.js - Manages game score and lives
 export class ScoreManager {
     constructor(events) {
+        console.log('ScoreManager constructor called with events:', events);
+        
         this.events = events;
         console.log('ScoreManager received EventBus:', this.event);
         this.score = 0;

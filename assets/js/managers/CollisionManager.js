@@ -48,7 +48,10 @@ export class CollisionManager {
                 const enemy = enemies[j];
                 
                 if (bullet.collidesWith(enemy)) {
-                    console.log('Collision detected! Publishing enemy:destroyed event');
+                    console.log('Collision detected! Direct score update');
+
+                    // Direct score update
+                    document.getElementById('score').textContent = `Score: ${parseInt(document.getElementById('score').textContent.split(': ')[1] || '0') + 10}`;
                     
                     // Create explosion at enemy position
                     this.events.publish('entity:explode', {
