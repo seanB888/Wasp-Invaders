@@ -2,6 +2,7 @@
 export class ScoreManager {
     constructor(events) {
         this.events = events;
+        console.log('ScoreManager received EventBus:', this.event);
         this.score = 0;
         this.lives = 5;
         
@@ -14,7 +15,8 @@ export class ScoreManager {
      */
     setupEvents() {
         // Listen for enemy destroyed events
-        this.events.subscribe('enemy:destroyed', () => {
+        this.events.subscribe('enemy:destroyed', (data) => {
+            console.log('Enemy destroyed event received!', data);
             this.addScore(10);
         });
         

@@ -78,13 +78,18 @@ export class Entity {
      */
     collidesWith(other, threshold = 2) {
         if (!this.active || !other.active) return false;
-        return this.position.distanceTo(other.position) < threshold;
+        const distance = this.position.distanceTo(other.position);
+        console.log('Collision check:', distance < threshold, 'distance:', distance, 'threshold:', threshold);
+        return distance < threshold;
     }
+    
     
     /**
      * Destroy this entity and remove from scene
      */
     destroy() {
+        console.log('Entity destroyed:', this.id);
+
         this.active = false;
         if (this.mesh) {
             this.scene.remove(this.mesh);

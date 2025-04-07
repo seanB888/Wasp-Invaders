@@ -13,6 +13,7 @@ export class Game {
     constructor() {
         // Core systems
         this.events = new EventBus();
+        console.log('Main EventBus created:', this.event);
         this.renderer = new Renderer();
         this.input = new InputManager(this.events);
         

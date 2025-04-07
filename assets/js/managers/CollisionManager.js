@@ -39,6 +39,8 @@ export class CollisionManager {
      * @param {Array} enemies - Enemies
      */
     checkPlayerBulletsVsEnemies(bullets, enemies) {
+        console.log('Checking collisions: bullets=', bullets.length, 'enemies=', enemies.length);
+        
         for (let i = bullets.length - 1; i >= 0; i--) {
             const bullet = bullets[i];
             
@@ -46,6 +48,8 @@ export class CollisionManager {
                 const enemy = enemies[j];
                 
                 if (bullet.collidesWith(enemy)) {
+                    console.log('Collision detected! Publishing enemy:destroyed event');
+                    
                     // Create explosion at enemy position
                     this.events.publish('entity:explode', {
                         position: enemy.getPosition(),
