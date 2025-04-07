@@ -154,6 +154,7 @@ export class Game {
         if (this.state === GAME_STATES.PLAYING) {
             // Update all game systems
             this.entities.update(deltaTime);
+            this.level.updateEnemies(deltaTime);
             this.collisions.update(deltaTime);
             this.powerUps.update(deltaTime);
             

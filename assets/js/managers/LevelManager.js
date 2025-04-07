@@ -7,8 +7,11 @@ export class LevelManager {
         this.entityManager = entityManager;
         this.level = 1;
         this.enemySpeed = 0.3;
+        this.enemyDirection = 1;
         this.enemyMoveDelay = 500; // ms
         this.enemyShotDelay = 1000; // ms
+        this.lastEnemyMove = Date.now();
+        this.lastEnemyShot = Date.now();
     }
     
     /**
@@ -87,4 +90,54 @@ export class LevelManager {
         this.increaseLevel();
         this.spawnEnemies();
     }
+
+    // Add this to your LevelManager class
+updateEnemies(deltaTime) {
+    if (!this.entityManager) return;
+    
+    const now = Date.now();
+    let changeDirection = false;
+    const enemies = this.entityManager.enemies;
+    
+    // Move enemies based on timer
+    if (now - this.lastEnemyMove > this.enemyMoveDelay) {
+        this.lastEnemyMove = now;
+        
+        for (let enemy of enemies) {
+            // Move enemy horizontally
+            enemy.position.x += this.enemyDirection * this.enemySpeed;
+            
+            // Check if any enemy is at the edge
+            if (
+                enemy.position.x > GAME_WIDTH / 2 - 3 ||
+                enemy.position.x < -GAME_WIDTH / 2 + 3
+            ) {
+                changeDirection = true;
+            }
+        }
+        
+        if (changeDirection) {
+            // Reverse direction
+            this.enemyDirection *= -1;
+            
+            // Move enemies down
+            for (let enemy of enemies) {
+                enemy.position.y -= ENEMY_DESCENT;
+            }
+        }
+    }
+    
+    // Random enemy shooting
+    if (enemies.length > 0 && now - this.lastEnemyShot > this.enemyShotDelay) {
+        this.lastEnemyShot = now;
+        
+        // Random enemy shoots
+        const randomIndex = Math.floor(Math.random() * enemies.length);
+        enemies[randomIndex].shoot();
+        
+        // Adjust difficulty based on remaining enemies
+        this.enemyShotDelay = Math.max(500, 1000 - (ENEMY_ROWS * ENEMIES_PER_ROW - enemies.length) * 15);
+        this.enemyMoveDelay = Math.max(200, 500 - (ENEMY_ROWS * ENEMIES_PER_ROW - enemies.length) * 9);
+    }
+}
 }
