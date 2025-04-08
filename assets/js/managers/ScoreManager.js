@@ -4,7 +4,7 @@ export class ScoreManager {
         console.log('ScoreManager constructor called with events:', events);
         
         this.events = events;
-        console.log('ScoreManager received EventBus:', this.event);
+        console.log('ScoreManager received EventBus:', this.events);
         this.score = 0;
         this.lives = 5;
         
