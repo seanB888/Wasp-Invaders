@@ -48,7 +48,13 @@ export class CollisionManager {
                 const enemy = enemies[j];
                 
                 if (bullet.collidesWith(enemy)) {
-                    console.log('Collision detected! Direct score update');
+                    console.log('DIRECT COLLISION DETECTED in CollisionManager!');
+
+                    // DIRECT SCORE UPDATE
+                    let currentScore = parseInt(document.getElementById('score').textContent.split(': ')[1] || '0');
+                    currentScore += 10;
+                    document.getElementById('score').textContent = `Score: ${currentScore}`;
+                    console.log('Updated score directly to:', currentScore);
 
                     // Direct score update
                     document.getElementById('score').textContent = `Score: ${parseInt(document.getElementById('score').textContent.split(': ')[1] || '0') + 10}`;

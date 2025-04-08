@@ -76,12 +76,17 @@ export class Entity {
      * @param {number} threshold - Distance threshold for collision
      * @return {boolean} - Whether entities collide
      */
-    collidesWith(other, threshold = 10) {
+    collidesWith(other, threshold = 15) {
         if (!this.active || !other.active) return false;
         const distance = this.position.distanceTo(other.position);
         console.log('Collision check:', distance < threshold, 'distance:', distance, 'threshold:', threshold);
-        // return distance < threshold;
-        return this.position.distanceTo(other.position) < threshold;
+        
+        // If collision detected, log more info
+        if (distance < threshold) {
+            console.log('COLLISION DETECTED between:', this.id, 'and', other.id);
+        }
+
+        return distance < threshold;
     }
     
     
