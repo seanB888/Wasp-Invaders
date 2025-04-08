@@ -71,6 +71,13 @@ export class Game {
             startScreen: document.getElementById("startScreen"),
             shieldElement: document.getElementById('shield')
         };
+
+        this.domElements.muteButton = document.getElementById('muteButton');
+        this.domElements.muteButton.addEventListener('click', () => {
+            const isMuted = this.audio.isMuted;
+            this.audio.setMuted(!isMuted);
+            this.domElements.muteButton.textContent = !isMuted ? '🔇' : '🔊';
+        });
         
         // Add button listeners
         this.domElements.resetButton.addEventListener("click", () => this.resetGame());
