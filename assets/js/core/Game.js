@@ -8,6 +8,7 @@ import { ScoreManager } from '../managers/ScoreManager.js';
 import { PowerUpManager } from '../managers/PowerUpManager.js';
 import { LevelManager } from '../managers/LevelManager.js';
 import { GAME_STATES, GAME_WIDTH, GAME_HEIGHT } from '../utils/Constants.js';
+import { AudioManager } from './AudioManager.js';
 
 export class Game {
     constructor() {
@@ -16,6 +17,7 @@ export class Game {
         console.log('Main EventBus created:', this.event);
         this.renderer = new Renderer();
         this.input = new InputManager(this.events);
+        this.audio = new AudioManager(this.events);
         
         // Game state
         this.state = GAME_STATES.INIT;
