@@ -1,0 +1,44 @@
+.
+├── README.md
+├── assets
+│   ├── audio
+│   │   ├── enemy-shoot.mp3
+│   │   ├── explosion.mp3
+│   │   ├── game-music.mp3
+│   │   ├── game-over.mp3
+│   │   ├── gun-shot.mp3
+│   │   ├── level-up.mp3
+│   │   ├── player-hit.mp3
+│   │   └── power-up.mp3
+│   ├── css
+│   │   └── styles.css
+│   └── js
+│       ├── core
+│       │   ├── EventBus.js
+│       │   ├── Game.js
+│       │   ├── Input.js
+│       │   └── Renderer.js
+│       ├── entities
+│       │   ├── Bullet.js
+│       │   ├── Enemy.js
+│       │   ├── Entity.js
+│       │   ├── Particle.js
+│       │   ├── Player.js
+│       │   └── PowerUp.js
+│       ├── main.js
+│       ├── managers
+│       │   ├── AudioManager.js
+│       │   ├── CollisionManager.js
+│       │   ├── EntityManager.js
+│       │   ├── LevelManager.js
+│       │   ├── PowerUpManager.js
+│       │   └── ScoreManager.js
+│       └── utils
+│           ├── Constants.js
+│           ├── MathUtils.js
+│           └── ModelFactory.js
+├── index.html
+├── setup_wasp_invaders.sh
+└── wasp_invaders.txt
+
+9 directories, 33 files
