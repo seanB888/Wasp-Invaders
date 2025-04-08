@@ -8,7 +8,7 @@ import { ScoreManager } from '../managers/ScoreManager.js';
 import { PowerUpManager } from '../managers/PowerUpManager.js';
 import { LevelManager } from '../managers/LevelManager.js';
 import { GAME_STATES, GAME_WIDTH, GAME_HEIGHT } from '../utils/Constants.js';
-import { AudioManager } from './AudioManager.js';
+import { AudioManager } from '../managers/AudioManager.js';
 
 export class Game {
     constructor() {

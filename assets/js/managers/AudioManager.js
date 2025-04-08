@@ -21,12 +21,12 @@ export class AudioManager {
     init() {
         // Load sound effects
         this.loadSound('playerShoot', './assets/audio/gun-shot.mp3');
-        this.loadSound('enemyShoot', './assets/audio/enemy-shoot.mp3');
-        this.loadSound('explosion', './assets/audio/explosion.mp3');
-        this.loadSound('playerHit', './assets/audio/player-hit.mp3');
-        this.loadSound('powerUp', './assets/audio/power-up.mp3');
-        this.loadSound('gameOver', './assets/audio/game-over.mp3');
-        this.loadSound('levelComplete', './assets/audio/level-complete.mp3');
+        // this.loadSound('enemyShoot', './assets/audio/enemy-shoot.mp3');
+        // this.loadSound('explosion', './assets/audio/explosion.mp3');
+        // this.loadSound('playerHit', './assets/audio/player-hit.mp3');
+        // this.loadSound('powerUp', './assets/audio/power-up.mp3');
+        // this.loadSound('gameOver', './assets/audio/game-over.mp3');
+        // this.loadSound('levelComplete', './assets/audio/level-complete.mp3');
         
         // Load music tracks
         this.loadMusic('./assets/audio/game-music.mp3');
