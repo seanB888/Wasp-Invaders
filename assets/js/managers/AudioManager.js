@@ -20,7 +20,7 @@ export class AudioManager {
      */
     init() {
         // Load sound effects
-        this.loadSound('playerShoot', './assets/audio/player-shoot.mp3');
+        this.loadSound('playerShoot', './assets/audio/gun-shot.mp3');
         this.loadSound('enemyShoot', './assets/audio/enemy-shoot.mp3');
         this.loadSound('explosion', './assets/audio/explosion.mp3');
         this.loadSound('playerHit', './assets/audio/player-hit.mp3');

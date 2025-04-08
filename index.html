@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wasp Invaders</title>
-  <link rel="stylesheet" href="./assets/css/styles.css">
-</head>
-<body>
-  <div id="gameContainer">
-    <div id="score">Score: 0</div>
-    <div id="lives">Lives: 5</div>
-    <div id="shield">SHIELD ACTIVE</div>
-    <div id="gameOver">
-      Game Over<br>
-      Final Score: <span id="finalScore">0</span><br>
-      <button id="resetButton">Play Again</button>
-    </div>
-    <div id="startScreen">
-      <h1>WASP INVADERS</h1>
-      <div class="instructions">
-        <p>Protect your ant colony from the invading wasps!</p>
-        <p>Use arrow keys or A/D to move, spacebar to shoot.</p>
-        <p>Each wasp kill is worth 10 points.</p>
-        <p>Collect blue shield power-ups for temporary invincibility!</p>
-        <p>You have 5 lives. Good luck, defender!</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wasp Invaders</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <div id="gameContainer">
+      <div id="score">Score: 0</div>
+      <div id="lives">Lives: 5</div>
+      <div id="shield">SHIELD ACTIVE</div>
+      <div id="gameOver">
+        Game Over<br />
+        Final Score: <span id="finalScore">0</span><br />
+        <button id="resetButton">Play Again</button>
       </div>
-      <button id="startButton">START GAME</button>
-
-      <div id="audioControls">
-        <button id="muteButton" class="controlButton">🔊</button>
+      <div id="startScreen">
+        <h1>WASP INVADERS</h1>
+        <div class="instructions">
+          <p>Protect your ant colony from the invading wasps!</p>
+          <p>Use arrow keys or A/D to move, spacebar to shoot.</p>
+          <p>Each wasp kill is worth 10 points.</p>
+          <p>Collect blue shield power-ups for temporary invincibility!</p>
+          <p>You have 5 lives. Good luck, defender!</p>
+        </div>
+        <div id="audioControls">
+          <button id="muteButton" class="controlButton">🔊</button>
+        </div>
+        <button id="startButton">START GAME</button>
       </div>
     </div>
-  </div>
-  <!-- THREE.JS Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <!-- Main entry point - only load this one file with type="module" -->
-  <script type="module" src="./assets/js/main.js"></script>
-</body>
+    <!-- THREE.JS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Main entry point - only load this one file with type="module" -->
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
 </html>
