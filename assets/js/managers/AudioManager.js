@@ -21,12 +21,12 @@ export class AudioManager {
     init() {
         // Load sound effects
         this.loadSound('playerShoot', './assets/audio/gun-shot.mp3');
-        // this.loadSound('enemyShoot', './assets/audio/enemy-shoot.mp3');
-        // this.loadSound('explosion', './assets/audio/explosion.mp3');
-        // this.loadSound('playerHit', './assets/audio/player-hit.mp3');
-        // this.loadSound('powerUp', './assets/audio/power-up.mp3');
-        // this.loadSound('gameOver', './assets/audio/game-over.mp3');
-        // this.loadSound('levelComplete', './assets/audio/level-complete.mp3');
+        this.loadSound('enemyShoot', './assets/audio/enemy-shoot.mp3');
+        this.loadSound('explosion', './assets/audio/explosion.mp3');
+        this.loadSound('playerHit', './assets/audio/player-hit.mp3');
+        this.loadSound('powerUp', './assets/audio/power-up.mp3');
+        this.loadSound('gameOver', './assets/audio/game-over.mp3');
+        this.loadSound('levelComplete', './assets/audio/level-complete.mp3');
         
         // Load music tracks
         this.loadMusic('./assets/audio/game-music.mp3');
@@ -63,7 +63,18 @@ export class AudioManager {
      * @param {string} path - Path to sound file
      */
     loadSound(name, path) {
-        const audio = new Audio(path);
+        const audio = new Audio();
+
+        // Try to load OGG first, fallback to MP3
+        const oggPath = path.replace('.mp3', '.ogg');
+        const mp3Path = path;
+        
+        if (audio.canPlayType('audio/ogg') !== '') {
+            audio.src = oggPath;
+        } else {
+            audio.src = mp3Path;
+        }
+
         audio.preload = 'auto';
         this.sounds[name] = audio;
     }
